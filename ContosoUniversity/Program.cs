@@ -1,21 +1,23 @@
 using ContosoUniversity.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+
 public class Program
 {
     private static void Main(string[] args)
     {
-        var host = CreateHostBuilder(args).Build();
-        CreateDbIfNotExists(host);
-
         var builder = WebApplication.CreateBuilder(args);
+
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-        builder.Services.AddDbContext<SchoolContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultController")));
-
+        builder.Services.AddDbContext<SchoolContext>(options => options.
+        UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
         var app = builder.Build();
+
+        CreateDbIfNotExsits(app);
 
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())
@@ -38,28 +40,29 @@ public class Program
 
         app.Run();
     }
-    private static void CreateDbIfNotExists(IHost host)
+
+    private static void CreateDbIfNotExsits(IHost host)
     {
         using (var scope = host.Services.CreateScope())
         {
             var services = scope.ServiceProvider;
             try
             {
-                var context = services.GetRequiredService<SchoolContext>();
+                var context = services.GetRequiredService<
+                    SchoolContext>();
                 DbInitializer.Initialize(context);
             }
             catch (Exception ex)
             {
                 var logger = services.GetRequiredService<ILogger<Program>>();
-                logger.LogError(ex, "An error occured creating the database");
+                logger.LogError(ex, "an error FISH");
             }
-
         }
     }
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
+    public static IHostBuilder CreaterHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                webBuilder.UseStartup<Program>();
-            });
+        .ConfigureWebHostDefaults(webBuilder =>
+        {
+            webBuilder.UseStartup<Program>();
+        });
 }

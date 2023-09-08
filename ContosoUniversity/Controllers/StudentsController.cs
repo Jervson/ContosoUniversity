@@ -7,8 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ContosoUniversity.Data;
 using ContosoUniversity.Models;
-using ContosoUniversity.Data;
-using ContosoUniversity.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace ContosUniversityHannes.Controllers
 {
@@ -38,6 +37,9 @@ namespace ContosUniversityHannes.Controllers
             }
 
             var student = await _context.Students
+                .Include(s => s.Enrollments)
+                .ThenInclude(e => e.Course)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (student == null)
             {
@@ -60,11 +62,18 @@ namespace ContosUniversityHannes.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,LastName,FirstMidName,EnrollmentDate")] Student student)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(student);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(student);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "error lol");
             }
             return View(student);
         }

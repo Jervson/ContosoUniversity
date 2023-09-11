@@ -28,6 +28,11 @@ namespace ContosoUniversity.Data
             }
             context.SaveChanges();
 
+            var instructors = new Instructor[] 
+            { 
+                
+            };
+
             var courses = new Course[]
             {
                 new Course() {CourseID=1050, Title="Programming", Credits=160},
@@ -42,6 +47,7 @@ namespace ContosoUniversity.Data
                 context.Courses.Add(c);
             }
             context.SaveChanges();
+
 
             var enrollments = new Enrollment[]
             {

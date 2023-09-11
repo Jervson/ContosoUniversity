@@ -30,7 +30,7 @@ namespace ContosoUniversity.Data
 
             var instructors = new Instructor[] 
             { 
-                
+                new Instructor {FirstMidName = "Bat", LastName = "Man"}
             };
 
             var courses = new Course[]

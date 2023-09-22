@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ContosoUniversity.Data;
 using ContosoUniversity.Models;
 
-namespace ContosoUniversity.Views
+namespace ContosoUniversity.Controllers
 {
     public class InstructorsController : Controller
     {
@@ -22,9 +22,9 @@ namespace ContosoUniversity.Views
         // GET: Instructors
         public async Task<IActionResult> Index()
         {
-              return _context.Instructors != null ? 
-                          View(await _context.Instructors.ToListAsync()) :
-                          Problem("Entity set 'SchoolContext.Instructors'  is null.");
+            return _context.Instructors != null ?
+                        View(await _context.Instructors.ToListAsync()) :
+                        Problem("Entity set 'SchoolContext.Instructors'  is null.");
         }
 
         // GET: Instructors/Details/5
@@ -150,14 +150,14 @@ namespace ContosoUniversity.Views
             {
                 _context.Instructors.Remove(instructor);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool InstructorExists(int id)
         {
-          return (_context.Instructors?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Instructors?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

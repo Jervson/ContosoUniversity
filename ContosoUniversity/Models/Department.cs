@@ -6,7 +6,7 @@ namespace ContosoUniversity.Models
 {
     public class Department
     {
-        public int DepartmentID { get; set; }
+        public int DepartmentId { get; set; }
         [StringLength(50, MinimumLength = 3)]
         public string Name { get; set; }
         [DataType(DataType.Currency)]
@@ -15,7 +15,7 @@ namespace ContosoUniversity.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
-        public int? InstructorID { get; set; }
+        public int? InstructorId { get; set; }
         [Timestamp]
         public byte RowVersion { get; set; }
         public Instructor Administrator { get; set; }

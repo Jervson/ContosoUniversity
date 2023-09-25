@@ -50,28 +50,28 @@ namespace ContosoUniversity.Data
                     Name = "Infotechnology",
                     Budget = 0,
                     StartDate = DateTime.Parse("2007-09-01"),
-                    InstructorID = instructors.Single(i => i.LastName == "Parm").Id     
+                    InstructorId = instructors.Single(i => i.LastName == "Parm").Id     
                 },
                 new Department
                 {
                     Name = "Joomarlus",
                     Budget = 0,
                     StartDate = DateTime.Parse("2007-09-01"),
-                    InstructorID = instructors.Single(i => i.LastName == "Vana").Id
+                    InstructorId = instructors.Single(i => i.LastName == "Vana").Id
                 },
                 new Department
                 {
                     Name = "Internet Trolling & Tiktok 101",
                     Budget = 0,
                     StartDate = DateTime.Parse("2007-09-01"),
-                    InstructorID = instructors.Single(i => i.LastName == "Kuningas").Id
+                    InstructorId = instructors.Single(i => i.LastName == "Kuningas").Id
                 },
                 new Department
                 {
                     Name = "Kokandus",
                     Budget = 0,
                     StartDate = DateTime.Parse("2007-09-01"),
-                    InstructorID = instructors.Single(i => i.LastName == "Suprise").Id
+                    InstructorId = instructors.Single(i => i.LastName == "Suprise").Id
                 },
             };
             foreach (Department d in departments)
@@ -165,21 +165,21 @@ namespace ContosoUniversity.Data
 
             var enrollments = new Enrollment[]
             {
-                new Enrollment{StudentID=1,CourseID=1050,Grade=Grade.A},
-                new Enrollment{StudentID=1,CourseID=6900,Grade=Grade.B},
-                new Enrollment{StudentID=1,CourseID=1420,Grade=Grade.A},
-                new Enrollment{StudentID=1,CourseID=1050,Grade=Grade.A},
-                new Enrollment{StudentID=2,CourseID=1050,Grade=Grade.C},
-                new Enrollment{StudentID=2,CourseID=6900,Grade=Grade.D},
-                new Enrollment{StudentID=3,CourseID=1420,Grade=Grade.F},
-                new Enrollment{StudentID=3,CourseID=1050,Grade=Grade.A},
-                new Enrollment{StudentID=3,CourseID=1050,Grade=Grade.A},
-                new Enrollment{StudentID=3,CourseID=6900,Grade=Grade.F},
-                new Enrollment{StudentID=3,CourseID=1420,Grade=Grade.A},
-                new Enrollment{StudentID=4,CourseID=1050,Grade=Grade.D},
-                new Enrollment{StudentID=5,CourseID=1050,Grade=Grade.A},
-                new Enrollment{StudentID=5,CourseID=6900,Grade=Grade.A},
-                new Enrollment{StudentID=5,CourseID=1420,Grade=Grade.F},
+                new Enrollment{StudentId=1,CourseId=1050,Grade=Grade.A},
+                new Enrollment{StudentId=1,CourseId=6900,Grade=Grade.B},
+                new Enrollment{StudentId=1,CourseId=1420,Grade=Grade.A},
+                new Enrollment{StudentId=1,CourseId=1050,Grade=Grade.A},
+                new Enrollment{StudentId=2,CourseId=1050,Grade=Grade.C},
+                new Enrollment{StudentId=2,CourseId=6900,Grade=Grade.D},
+                new Enrollment{StudentId=3,CourseId=1420,Grade=Grade.F},
+                new Enrollment{StudentId=3,CourseId=1050,Grade=Grade.A},
+                new Enrollment{StudentId=3,CourseId=1050,Grade=Grade.A},
+                new Enrollment{StudentId=3,CourseId=6900,Grade=Grade.F},
+                new Enrollment{StudentId=3,CourseId=1420,Grade=Grade.A},
+                new Enrollment{StudentId=4,CourseId=1050,Grade=Grade.D},
+                new Enrollment{StudentId=5,CourseId=1050,Grade=Grade.A},
+                new Enrollment{StudentId=5,CourseId=6900,Grade=Grade.A},
+                new Enrollment{StudentId=5,CourseId=1420,Grade=Grade.F},
             };
             foreach (Enrollment e in enrollments)
             {

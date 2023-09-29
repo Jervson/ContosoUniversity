@@ -30,22 +30,18 @@
             @Html.DisplayFor(model => model.StartDate)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RowVersion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RowVersion)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Administrator)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Administrator.FirstMidName)
         </dd>
-    </dl>
-    
+    </dl> 
     <form asp-action="Delete">
         <input type="hidden" asp-for="DepartmentId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="hidden" asp-for="RowVersion" />
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <a asp-action="Index">Back to List</a>
+        </div>
     </form>
 </div>

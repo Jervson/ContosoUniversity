@@ -6,6 +6,7 @@ namespace ContosoUniversity.Models
 {
     public class Department
     {
+        [Key]
         public int DepartmentId { get; set; }
         [StringLength(50, MinimumLength = 3)]
         public string Name { get; set; }
@@ -18,7 +19,7 @@ namespace ContosoUniversity.Models
         public int? InstructorId { get; set; }
         [Timestamp]
         public byte? RowVersion { get; set; }
-        public Instructor Administrator { get; set; }
+        public Instructor? Administrator { get; set; }
         public ICollection<Course>? Courses { get; set; }
     }
 }

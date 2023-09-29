@@ -17,7 +17,6 @@ namespace ContosoUniversity.Controllers
         {
             return View(await _context.Students.ToListAsync());
         }
-
         public async Task<IActionResult> Details(int? Id)
         {
             if (Id == null)

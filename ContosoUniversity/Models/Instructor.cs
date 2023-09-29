@@ -8,7 +8,6 @@ namespace ContosoUniversity.Models
     public class Instructor
     {
         [Key]
-
         public int Id { get; set; }
         [Required]
         [StringLength(50)]
@@ -19,12 +18,18 @@ namespace ContosoUniversity.Models
         [Column("FirstName")]
         [Display(Name = "First Name")]
         public string FirstMidName { get; set; }
-        public string FullName { get { return LastName + ", " + FirstMidName; } }
-        [DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+
+        [Display(Name = "Full Name")]
+        public string FullName
+        {
+            get
+            { return LastName + ", " + FirstMidName; }
+        }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Hire Date")]
         public DateTime HireDate { get; set; }
-        public ICollection<CourseAssignment>? CourseAssignment { get; set; }
+        public ICollection<CourseAssignment>? CourseAssignments { get; set; }
         public OfficeAssignment? OfficeAssignment { get; set; }
     }
 }

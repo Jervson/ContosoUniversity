@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
 namespace ContosoUniversity.Models
 {
@@ -8,6 +9,12 @@ namespace ContosoUniversity.Models
         public string LastName { get; set; }
         public string FirstMidName { get; set; }
         public DateTime EnrollmentDate { get; set; }
+        [Display(Name = "Full Name")]
+        public string FullName
+        {
+            get
+            { return LastName + ", " + FirstMidName; }
+        }
         public ICollection<Enrollment> Enrollments { get; set; }  
     }
 }

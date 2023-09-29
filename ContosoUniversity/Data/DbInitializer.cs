@@ -43,6 +43,13 @@ namespace ContosoUniversity.Data
             }
             context.SaveChanges();
 
+            context.Database.EnsureCreated();
+
+            if (context.Departments.Any())
+            {
+                return;
+            }
+
             var departments = new Department[]
             {
                 new Department
@@ -80,13 +87,37 @@ namespace ContosoUniversity.Data
             }
             context.SaveChanges();
 
+            var officeAssignments = new OfficeAssignment[]
+{
+                new OfficeAssignment()
+                {
+                    InstructorId = instructors.Single(i => i.LastName == "Vana").Id,
+                    Location = "A236",
+                },
+                new OfficeAssignment()
+                {
+                    InstructorId = instructors.Single(i => i.LastName == "Parm").Id,
+                    Location = "Balta turu värav",
+                },
+                new OfficeAssignment()
+                {
+                    InstructorId = instructors.Single(i => i.LastName == "Suprise").Id,
+                    Location = "Kaubik kooli ees",
+                }
+};
+            foreach (OfficeAssignment o in officeAssignments)
+            {
+                context.OfficeAssignments.Add(o);
+            }
+            context.SaveChanges();
+
             var courses = new Course[]
             {
-                new Course() {CourseID=1050,Title="Programmeerimine",Credits=160},
-                new Course() {CourseID=6900,Title="Keemia",Credits=160},
-                new Course() {CourseID=1420,Title="Matemaatika",Credits=160},
-                new Course() {CourseID=6666,Title="Testimine",Credits=160},
-                new Course() {CourseID=1234,Title="Riigikaitse",Credits=160}
+                new Course() {CourseId=1050,Title="Programmeerimine",Credits=160},
+                new Course() {CourseId=6900,Title="Keemia",Credits=160},
+                new Course() {CourseId=1420,Title="Matemaatika",Credits=160},
+                new Course() {CourseId=6666,Title="Testimine",Credits=160},
+                new Course() {CourseId=1234,Title="Riigikaitse",Credits=160}
             };
 
             foreach (Course c in courses)
@@ -94,67 +125,42 @@ namespace ContosoUniversity.Data
                 context.Courses.Add(c);
             }
             context.SaveChanges();
-
-            var officeAssignments = new OfficeAssignment[]
-            {
-                new OfficeAssignment()
-                {
-                    InstructorID = instructors.Single(i => i.LastName == "Vana").Id,
-                    Location = "A236",
-                },
-                new OfficeAssignment()
-                {
-                    InstructorID = instructors.Single(i => i.LastName == "Parm").Id,
-                    Location = "Balta turu värav",
-                },
-                new OfficeAssignment()
-                {
-                    InstructorID = instructors.Single(i => i.LastName == "Suprise").Id,
-                    Location = "Kaubik kooli ees",
-                }
-            };
-            foreach (OfficeAssignment o in officeAssignments)
-            {
-                context.OfficeAssignments.Add(o);
-            }
-            context.SaveChanges();
-
             var courseInstructors = new CourseAssignment[]
             {
                 new CourseAssignment
                 {
-                    CourseID = courses.Single(c => c.Title == "Keemia").CourseID,
-                    InstructorID = instructors.Single(i => i.LastName == "Parm").Id
+                    CourseId = courses.Single(c => c.Title == "Keemia").CourseId,
+                    InstructorId = instructors.Single(i => i.LastName == "Parm").Id
                 },
                 new CourseAssignment
                 {
-                    CourseID = courses.Single(c => c.Title == "Riigikaitse").CourseID,
-                    InstructorID = instructors.Single(i => i.LastName == "Parm").Id
+                    CourseId = courses.Single(c => c.Title == "Riigikaitse").CourseId,
+                    InstructorId = instructors.Single(i => i.LastName == "Parm").Id
                 },
                 new CourseAssignment
                 {
-                    CourseID = courses.Single(c => c.Title == "Matemaatika").CourseID,
-                    InstructorID = instructors.Single(i => i.LastName == "Parm").Id
+                    CourseId = courses.Single(c => c.Title == "Matemaatika").CourseId,
+                    InstructorId = instructors.Single(i => i.LastName == "Parm").Id
                 },
                 new CourseAssignment
                 {
-                    CourseID = courses.Single(c => c.Title == "Keemia").CourseID,
-                    InstructorID = instructors.Single(i => i.LastName == "Vana").Id
+                    CourseId = courses.Single(c => c.Title == "Keemia").CourseId,
+                    InstructorId = instructors.Single(i => i.LastName == "Vana").Id
                 },
                 new CourseAssignment
                 {
-                    CourseID = courses.Single(c => c.Title == "Programmeerimine").CourseID,
-                    InstructorID = instructors.Single(i => i.LastName == "Vana").Id
+                    CourseId = courses.Single(c => c.Title == "Programmeerimine").CourseId,
+                    InstructorId = instructors.Single(i => i.LastName == "Vana").Id
                 },
                 new CourseAssignment
                 {
-                    CourseID = courses.Single(c => c.Title == "Matemaatika").CourseID,
-                    InstructorID = instructors.Single(i => i.LastName == "Suprise").Id      
+                    CourseId = courses.Single(c => c.Title == "Matemaatika").CourseId,
+                    InstructorId = instructors.Single(i => i.LastName == "Suprise").Id
                 },
                 new CourseAssignment
                 {
-                    CourseID = courses.Single(c => c.Title == "Riigikaitse").CourseID,
-                    InstructorID = instructors.Single(i => i.LastName == "Suprise").Id
+                    CourseId = courses.Single(c => c.Title == "Riigikaitse").CourseId,
+                    InstructorId = instructors.Single(i => i.LastName == "Suprise").Id
                 },
             };
             foreach (CourseAssignment ci in courseInstructors)
@@ -162,6 +168,8 @@ namespace ContosoUniversity.Data
                 context.CourseAssignments.Add(ci);
             }
             context.SaveChanges();
+
+
 
             var enrollments = new Enrollment[]
             {
@@ -186,8 +194,6 @@ namespace ContosoUniversity.Data
                 context.Enrollments.Add(e);
             }
             context.SaveChanges();
-
-
         }
     }
 }

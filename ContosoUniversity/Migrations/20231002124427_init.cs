@@ -49,7 +49,7 @@ namespace ContosoUniversity.Migrations
                     Budget = table.Column<decimal>(type: "Money", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     InstructorId = table.Column<int>(type: "int", nullable: true),
-                    RowVersion = table.Column<byte>(type: "tinyint", rowVersion: true, nullable: false)
+                    RowVersion = table.Column<byte>(type: "tinyint", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -83,17 +83,18 @@ namespace ContosoUniversity.Migrations
                 name: "Course",
                 columns: table => new
                 {
-                    CourseId = table.Column<int>(type: "int", nullable: false),
+                    CourseId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Credits = table.Column<int>(type: "int", nullable: false),
-                    DepartmentID = table.Column<int>(type: "int", nullable: false)
+                    DepartmentId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Course", x => x.CourseId);
                     table.ForeignKey(
-                        name: "FK_Course_Department_DepartmentID",
-                        column: x => x.DepartmentID,
+                        name: "FK_Course_Department_DepartmentId",
+                        column: x => x.DepartmentId,
                         principalTable: "Department",
                         principalColumn: "DepartmentId",
                         onDelete: ReferentialAction.Cascade);
@@ -153,9 +154,9 @@ namespace ContosoUniversity.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Course_DepartmentID",
+                name: "IX_Course_DepartmentId",
                 table: "Course",
-                column: "DepartmentID");
+                column: "DepartmentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CourseAssignment_CourseId",

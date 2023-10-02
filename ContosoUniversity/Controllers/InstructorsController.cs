@@ -61,32 +61,38 @@ namespace ContosoUniversity.Controllers
             PopulateAssignedCourseData(instructor);
             return View(instructor);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-
-        public async Task<IActionResult> Create([Bind("HireDate,FirstMidName,LastName,OfficeAssignment")] Instructor instructor, string selectedCourses)
+        public async Task<IActionResult> Create([Bind("HireDate,FirstMidName,LastName,OfficeAssignment")] Instructor instructor, string[] selectedCourses)
         {
+            ModelState.Remove("OfficeAssignment.Instructor");
+
             if (selectedCourses != null)
             {
                 instructor.CourseAssignments = new List<CourseAssignment>();
                 foreach (var course in selectedCourses)
                 {
-                    var coursesToAdd = new CourseAssignment
+                    var courseToAdd = new CourseAssignment
                     {
                         InstructorId = instructor.Id,
                         CourseId = Convert.ToInt32(course)
                     };
-                    instructor.CourseAssignments.Add(coursesToAdd);
+
+                    instructor.CourseAssignments.Add(courseToAdd);
                 }
             }
+
             if (ModelState.IsValid)
             {
                 _context.Add(instructor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             PopulateAssignedCourseData(instructor);
             return View(instructor);
+
         }
 
         // GET: Instructors/Details/5
@@ -127,6 +133,7 @@ namespace ContosoUniversity.Controllers
             PopulateAssignedCourseData(instructor);
             return View(instructor);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int? id, string[] selectedCourses)

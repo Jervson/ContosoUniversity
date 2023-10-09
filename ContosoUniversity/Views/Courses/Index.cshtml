@@ -13,6 +13,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.CourseId)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Title)
             </th>
             <th>
@@ -21,15 +24,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Department)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CourseAssignments)
-            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseId)
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
@@ -39,22 +42,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Department.Name)
             </td>
-                <td>
-                    @{
-                        if (item.CourseAssignments != null)
-                        {
-                            foreach (var assignment in item.CourseAssignments)
-                            {
-                                if (assignment.Instructor != null && assignment.CourseId == item.CourseId)
-                                {
-                                    <div>
-                                        @assignment.Instructor.Id - @assignment.Instructor.FullName
-                                    </div>
-                                }
-                            }
-                        }
-                    }
-                </td>
 
             <td>
                 <a asp-action="Edit" asp-route-id="@item.CourseId">Edit</a> |

@@ -119,12 +119,9 @@ namespace ContosoUniversity.Data
                 new Course() {CourseId=6666,Title="Testimine",Credits=160},
                 new Course() {CourseId=1234,Title="Riigikaitse",Credits=160}
             };
-
-            foreach (Course c in courses)
-            {
-                context.Courses.Add(c);
-            }
+            context.Courses.AddRange(courses);
             context.SaveChanges();
+
             var courseInstructors = new CourseAssignment[]
             {
                 new CourseAssignment
